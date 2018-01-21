@@ -1,5 +1,7 @@
 package ebaydb.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -13,9 +15,10 @@ public class EbayItemPrice {
 
     @ManyToOne
     @JoinColumn(name = "item_id")
+    @JsonIgnore
     private EbayItem item;
 
-    private Date timestamp;
+    private Date timestamp = new Date();
 
     private double price;
 

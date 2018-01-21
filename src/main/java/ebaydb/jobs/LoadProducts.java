@@ -38,7 +38,7 @@ public class LoadProducts implements ApplicationListener<ApplicationReadyEvent> 
         List<GameProduct> gameList = csvParser.parseGameList(gamecubeCsv, GamePlatform.GAMECUBE);
         gameList.removeAll(dbGameList);
         for (GameProduct game : gameList) {
-            System.out.println(String.format("Adding new Game: %s, %s", game.getTitle(), game.getPlatform()));
+            System.out.printf("Adding new Game: %s, %s\n", game.getTitle(), game.getPlatform());
             gameProductRepo.save(game);
         }
     }
