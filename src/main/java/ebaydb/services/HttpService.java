@@ -13,11 +13,10 @@ import java.io.IOException;
 @Service
 public class HttpService {
 
-    private HttpClient httpClient;
     private String baseUrl = "http://localhost:8080/api";
 
     public HttpService() {
-        httpClient = HttpClientBuilder.create().build();
+
     }
 
     public JsonObject httpGetJson(String url) {
@@ -25,6 +24,7 @@ public class HttpService {
     }
 
     public String httpGet(String url) {
+        HttpClient httpClient = HttpClientBuilder.create().build();
         try {
             return IOUtils.toString(httpClient.execute(new HttpGet(baseUrl + url)).getEntity().getContent());
         } catch (IOException e) {
