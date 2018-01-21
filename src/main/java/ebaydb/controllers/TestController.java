@@ -28,10 +28,6 @@ public class TestController {
 
     @RequestMapping("search")
     public void search(@RequestParam("s") String term) {
-        try {
-            crawler.crawlSoldNewest(URLEncoder.encode(term, "UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+        crawler.crawlSoldNewest(term);
     }
 }

@@ -13,6 +13,9 @@ import ebaydb.services.HttpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 @Component
 public class EbayCrawler {
 
@@ -27,22 +30,36 @@ public class EbayCrawler {
 
     }
 
-    public void crawlSoldNewest(String title) {
-        parseItems("/search?s=" + title + "&sold=true&location=global&order=newly");
+    public void crawlSoldNewest(String query) {
+        try {
+            parseItems("/search?s=" + URLEncoder.encode(query, "UTF-8") + "&sold=true&location=global&order=newly");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void crawlSoldLowest(String title) {
-        // TODO
+    public void crawlSoldLowest(String query) {
+        try {
+            parseItems("/search?s=" + URLEncoder.encode(query, "UTF-8") + "&sold=true&location=global&order=lowest");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void crawlBuyNowLowest(String title) {
-        // worldwide
-        // TODO
+    public void crawlBuyNowLowest(String query) {
+        try {
+            parseItems("/search?s=" + URLEncoder.encode(query, "UTF-8") + "&buynow=true&location=global&order=lowest");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
     public void crawlAuctionEndingSoon(String query) {
-        // worldwide
-        // TODO
+        try {
+            parseItems("/search?s=" + URLEncoder.encode(query, "UTF-8") + "&auction=true&location=global&order=soonest");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
     public void parseItems(String url) {
