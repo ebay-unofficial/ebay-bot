@@ -35,7 +35,7 @@ public class LoadProducts implements ApplicationListener<ApplicationReadyEvent> 
     }
 
     @Transactional
-    private void insertGames() {
+    void insertGames() {
         List<GameProduct> dbGameList = gameProductRepo.findAll();
         List<GameProduct> gameList = csvParser.parseGameList(gamecubeCsv, GamePlatform.GAMECUBE);
         gameList.removeAll(dbGameList);
