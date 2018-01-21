@@ -69,6 +69,8 @@ public class EbayCrawler {
 
             itemRepository.save(item);
             itemPriceRepository.save(price);
+
+            System.out.printf("Item %s stored\n", item.getId());
         }
     }
 
