@@ -18,6 +18,9 @@ public class GameProduct {
     @Enumerated(EnumType.STRING)
     private GamePlatform platform;
 
+    public GameProduct() {
+    }
+
     public GameProduct(String title, GamePlatform platform) {
         this.title = title;
         this.platform = platform;
