@@ -15,7 +15,7 @@ public class EbaySellerHistory {
     @JoinColumn(name = "seller")
     private EbaySeller seller;
 
-    private Date timestamp;
+    private Date timestamp = new Date();
 
     private int stars;
 

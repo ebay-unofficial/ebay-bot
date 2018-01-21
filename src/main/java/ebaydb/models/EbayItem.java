@@ -1,6 +1,7 @@
 package ebaydb.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -35,6 +36,10 @@ public class EbayItem {
     @ManyToOne
     @JoinColumn(name = "seller")
     private EbaySeller seller;
+
+    public EbayItem() {
+        prices = new ArrayList<>();
+    }
 
     public String getId() {
         return id;
@@ -114,6 +119,11 @@ public class EbayItem {
 
     public void setPrices(List<EbayItemPrice> prices) {
         this.prices = prices;
+    }
+
+    public void addPrice(EbayItemPrice price) {
+        this.prices.add(price);
+        price.setItem(this);
     }
 
     public EbaySeller getSeller() {

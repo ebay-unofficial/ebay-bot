@@ -2,6 +2,7 @@ package ebaydb.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,6 +18,11 @@ public class EbaySeller {
 
     @OneToMany(mappedBy = "seller")
     private List<EbayItem> items;
+
+    public EbaySeller() {
+        history = new ArrayList<>();
+        items = new ArrayList<>();
+    }
 
     public String getName() {
         return name;
