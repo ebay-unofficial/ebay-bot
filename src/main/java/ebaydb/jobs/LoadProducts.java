@@ -11,7 +11,6 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -34,12 +33,12 @@ public class LoadProducts implements ApplicationListener<ApplicationReadyEvent> 
         insertGames();
     }
 
-    @Transactional
-    void insertGames() {
+    private void insertGames() {
         List<GameProduct> dbGameList = gameProductRepo.findAll();
         List<GameProduct> gameList = csvParser.parseGameList(gamecubeCsv, GamePlatform.GAMECUBE);
         gameList.removeAll(dbGameList);
         for (GameProduct game : gameList) {
+            System.out.println(String.format("Adding new Game: %s, %s", game.getTitle(), game.getPlatform()));
             gameProductRepo.save(game);
         }
     }
