@@ -4,7 +4,7 @@ public enum GamePlatform {
 
     GAMECUBE("gamecube");
 
-    String name;
+    public String name;
 
     GamePlatform(String name) {
         this.name = name;
