@@ -17,7 +17,7 @@ public class CSVParser {
         List<GameProduct> gameList = new ArrayList<>();
         try {
             String content = IOUtils.toString(path.getInputStream());
-            String[] titles = content.split(",");
+            String[] titles = content.split("[|]");
             for (int i = 0; i < titles.length; i++) {
                 String title = titles[i];
                 GameProduct gameProduct = new GameProduct(title, platform);
