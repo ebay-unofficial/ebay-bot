@@ -6,6 +6,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -13,7 +14,8 @@ import java.io.IOException;
 @Service
 public class HttpService {
 
-    private String baseUrl = "http://localhost:8080/api";
+    @Value("${ebay.api.url}")
+    private String baseUrl;
 
     public HttpService() {
 
