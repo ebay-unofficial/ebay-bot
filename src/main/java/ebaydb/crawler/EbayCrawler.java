@@ -1,15 +1,14 @@
 package ebaydb.crawler;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import ebaydb.models.EbayItem;
 import ebaydb.models.EbayItemPrice;
-import ebaydb.models.EbaySeller;
-import ebaydb.models.EbaySellerHistory;
 import ebaydb.repositories.EbayItemPriceRepository;
 import ebaydb.repositories.EbayItemRepository;
 import ebaydb.services.HttpService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +17,7 @@ import java.net.URLEncoder;
 
 @Component
 public class EbayCrawler {
+    private static final Logger LOGGER = LoggerFactory.getLogger(EbayCrawler.class);
 
     @Autowired
     private HttpService httpService;
@@ -25,6 +25,7 @@ public class EbayCrawler {
     private EbayItemRepository itemRepository;
     @Autowired
     private EbayItemPriceRepository itemPriceRepository;
+
 
     public EbayCrawler() {
 
@@ -87,7 +88,7 @@ public class EbayCrawler {
             itemRepository.save(item);
             itemPriceRepository.save(price);
 
-            System.out.printf("Item %s stored\n", item.getId());
+            LOGGER.info("Item {}: {} \"{}\" stored", i, item.getId(), item.getTitle());
         }
     }
 
