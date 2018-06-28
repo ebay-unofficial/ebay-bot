@@ -79,11 +79,13 @@ public class EbayItemPrice {
         EbayItemPrice that = (EbayItemPrice) o;
         return Double.compare(that.price, price) == 0 &&
                 Double.compare(that.shipping, shipping) == 0 &&
-                Objects.equals(item, that.item);
+                Objects.equals(item, that.item) &&
+                Objects.equals(currency, that.currency);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(item, price, shipping);
+
+        return Objects.hash(item, price, shipping, currency);
     }
 }
