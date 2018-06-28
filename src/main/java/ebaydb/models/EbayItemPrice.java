@@ -2,6 +2,7 @@ package ebaydb.models;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "ebay_item_prices")
@@ -69,5 +70,20 @@ public class EbayItemPrice {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EbayItemPrice that = (EbayItemPrice) o;
+        return Double.compare(that.price, price) == 0 &&
+                Double.compare(that.shipping, shipping) == 0 &&
+                Objects.equals(item, that.item);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(item, price, shipping);
     }
 }
