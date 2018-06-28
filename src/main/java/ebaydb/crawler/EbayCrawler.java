@@ -69,27 +69,31 @@ public class EbayCrawler {
 
     public void parseItems(JsonArray apiItems) {
         for (int i=0; i<apiItems.size(); i++) {
-            JsonObject apiItem = apiItems.get(i).getAsJsonObject();
+            EbayItem item = parseItem(apiItems.get(i).getAsJsonObject());
 
-            EbayItemPrice price = new EbayItemPrice();
-            price.setPrice(apiItem.get("price").getAsDouble());
-            price.setShipping(apiItem.get("shipping").getAsDouble());
-            price.setCurrency(apiItem.get("currency").getAsString());
-
-            EbayItem item = new EbayItem();
-            item.setId(apiItem.get("id").getAsString());
-            item.setTitle(apiItem.get("title").getAsString());
-            item.setAuction(apiItem.get("auction").getAsBoolean());
-            item.setBuyNow(apiItem.get("buyNow").getAsBoolean());
-            item.setSuggestPrice(apiItem.get("suggestPrice").getAsBoolean());
-            item.setCondition(apiItem.get("condition").getAsString());
-            item.addPrice(price);
-
-            itemRepository.save(item);
-            itemPriceRepository.save(price);
-
-            LOGGER.info("Item {}: {} \"{}\" stored", i, item.getId(), item.getTitle());
+            LOGGER.info("Item {}: {} stored", i, item.toString());
         }
+    }
+
+    public EbayItem parseItem(JsonObject apiItem) {
+        EbayItemPrice price = new EbayItemPrice();
+        price.setPrice(apiItem.get("price").getAsDouble());
+        price.setShipping(apiItem.get("shipping").getAsDouble());
+        price.setCurrency(apiItem.get("currency").getAsString());
+
+        EbayItem item = new EbayItem();
+        item.setId(apiItem.get("id").getAsString());
+        item.setTitle(apiItem.get("title").getAsString());
+        item.setAuction(apiItem.get("auction").getAsBoolean());
+        item.setBuyNow(apiItem.get("buyNow").getAsBoolean());
+        item.setSuggestPrice(apiItem.get("suggestPrice").getAsBoolean());
+        item.setCondition(apiItem.get("condition").getAsString());
+        item.addPrice(price);
+
+        itemRepository.save(item);
+        itemPriceRepository.save(price);
+
+        return item;
     }
 
 }

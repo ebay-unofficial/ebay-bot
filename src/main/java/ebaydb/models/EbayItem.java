@@ -133,4 +133,9 @@ public class EbayItem {
     public void setSeller(EbaySeller seller) {
         this.seller = seller;
     }
+
+    @Override
+    public String toString() {
+        return id + " \'" + title + "\'";
+    }
 }
